@@ -1,0 +1,469 @@
+main {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.center {
+  text-align: center;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* ---------- Page 1 : résultats ---------- */
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.donut-card {
+  width: 100%;
+  padding: 28px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.donut {
+  position: relative;
+  width: min(280px, 100%);
+  margin: 0 auto;
+}
+
+.donut svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.donut-track {
+  fill: none;
+  stroke: var(--track);
+}
+
+.donut-segment {
+  fill: none;
+  cursor: pointer;
+  transition:
+    stroke-dasharray 0.8s ease,
+    stroke-dashoffset 0.8s ease,
+    opacity 0.2s;
+}
+
+.donut-segment.garcon {
+  stroke: var(--boy);
+}
+
+.donut-segment.fille {
+  stroke: var(--girl);
+}
+
+.donut-segment.dim {
+  opacity: 0.3;
+}
+
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.donut-center .value {
+  font-size: clamp(2.2rem, 10vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.donut-center .caption {
+  margin-top: 4px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+
+.legend li {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    'swatch label'
+    'pct pct'
+    'count count';
+  align-items: center;
+  column-gap: 8px;
+  min-width: 130px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: default;
+}
+
+.swatch {
+  grid-area: swatch;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+.swatch.garcon {
+  background: var(--boy);
+}
+
+.swatch.fille {
+  background: var(--girl);
+}
+
+.legend-label {
+  grid-area: label;
+  font-weight: 700;
+  text-align: left;
+}
+
+.legend-pct {
+  grid-area: pct;
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.legend-count {
+  grid-area: count;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.qr svg {
+  /* Fond blanc fixe pour rester scannable en mode sombre */
+  background: #fff;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+/* ---------- Page 2 : formulaire ---------- */
+
+.form-card {
+  padding: clamp(20px, 5vw, 32px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  margin: 18px 0 0;
+  padding: 0;
+  border: none;
+  font-weight: 600;
+}
+
+.field legend {
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+.field input:not([type='radio']) {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.field input:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+}
+
+.field-row {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 420px) {
+  .field-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.sex-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sex-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.sex-option input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+.sex-option.garcon input {
+  accent-color: var(--boy);
+}
+
+.sex-option.fille input {
+  accent-color: var(--girl);
+}
+
+.sex-option.garcon:has(input:checked) {
+  border-color: var(--boy);
+  background: color-mix(in srgb, var(--boy) 12%, transparent);
+}
+
+.sex-option.fille:has(input:checked) {
+  border-color: var(--girl);
+  background: color-mix(in srgb, var(--girl) 12%, transparent);
+}
+
+.sex-option:has(input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.error {
+  margin: 16px 0 0;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--surface);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.submit:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---------- Page admin ---------- */
+
+.admin {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.panel {
+  padding: clamp(18px, 4vw, 24px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--bg);
+}
+
+.filter {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter.active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.12);
+}
+
+.filter:focus-visible {
+  outline: 2px solid var(--focus);
+}
+
+.filter-count {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.voters {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.voters th,
+.voters td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+
+.voters th {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.voters tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.voters .num {
+  width: 2.5em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.tag::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.tag.garcon::before {
+  background: var(--boy);
+}
+
+.tag.fille::before {
+  background: var(--girl);
+}
+
+.danger-zone {
+  border-color: color-mix(in srgb, var(--danger) 40%, var(--border));
+}
+
+.danger-zone p {
+  margin: 6px 0 14px;
+}
+
+.reset-row {
+  display: flex;
+  gap: 8px;
+}
+
+.reset-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.reset-row input:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+}
+
+.danger {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--danger);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.danger:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.danger:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.success {
+  margin: 12px 0 0;
+  color: var(--success);
+  font-weight: 600;
+}
